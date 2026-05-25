@@ -1,0 +1,387 @@
+<html>
+<!--begin::Head-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>EMONEV</title>
+
+    <!--begin::Accessibility Meta Tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light " />
+    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <!--end::Accessibility Meta Tags-->
+
+    <!--begin::Primary Meta Tags-->
+    <meta name="title" content="e-monev" />
+    <meta name="author" content="ColorlibHQ" />
+    <!--end::Primary Meta Tags-->
+
+    <!--begin::Accessibility Features-->
+    <!-- Skip links will be dynamically added by accessibility.js -->
+    <meta name="supported-color-schemes" content="light " />
+    <link rel="preload" href="./css/adminlte.css" as="style" />
+    <!--end::Accessibility Features-->
+
+    <!--begin::Fonts-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+      integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
+      crossorigin="anonymous"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <!--end::Fonts-->
+
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+      crossorigin="anonymous"
+    />
+    <!--end::Third Party Plugin(OverlayScrollbars)-->
+
+    <!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      crossorigin="anonymous"
+    />
+    <!--end::Third Party Plugin(Bootstrap Icons)-->
+
+    <!--begin::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="./css/adminlte.css" />
+    <!--end::Required Plugin(AdminLTE)-->
+
+    <!-- apexcharts -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
+      integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0="
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css"
+      crossorigin="anonymous"
+    />
+    <link 
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" 
+      crossorigin="anonymous"
+    />
+
+    <style>
+        #myTable_wrapper *{
+            font-size: .75rem !important;
+        }
+        #myTable_wrapper th {
+            vertical-align: top !important;
+            font-weight: bold !important;
+        }
+        .dt-search{
+          display: none !important;
+        }
+    </style>
+  </head>
+
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <div class="app-wrapper">
+        <nav class="app-header navbar navbar-expand bg-body" id="navigation" tabindex="-1">
+            <!--begin::Container-->
+            <div class="container-fluid">
+              <!--begin::Start Navbar Links-->
+              <ul class="navbar-nav" role="navigation" aria-label="Navigation 1">
+                <li class="nav-item">
+                  <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                    <i class="bi bi-list"></i>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-md-block">
+                  <a href="#" class="nav-link">Home</a>
+                </li>
+              </ul>
+              <!--end::Start Navbar Links-->
+    
+              </ul>
+              <!--end::End Navbar Links-->
+            </div>
+            <!--end::Container-->
+        </nav>
+
+        <main class="app-main" id="main" tabindex="-1">
+            <div class="app-content">
+              <div class="text-center my-4 alert alert-light">
+                <h3>Realisasi Pemerintah Daerah</h3>
+                <h3>Kabupaten Blitar</h3>
+                <h3>Tahun 2026</h3>
+              </div>
+                <div class="container-fluid">
+                  <div class="col-12 my-4">
+                    <div class="card card-outline card-danger">
+                      <div class="card-header">
+                        <div class="row">
+                          <div class="col-12">
+                            <div id="skpd_q" class="mb-2"></div>
+                            <div id="keg_q" class="mb-2"></div>
+                            
+                            <button class="btn btn-sm btn-success" id="cari"><i class="bi bi-search"></i>Cari</button>
+                            <button class="btn btn-sm btn-danger" id="reset"><i class="bi bi-arrow-clockwise"></i>Reset</button>
+
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                  <div class="row text-center">
+                    <div class="col-4 ">
+                      <div class="alert alert-primary">
+                        <strong>Total Anggaran</strong>
+                        <p style="font-size: 1.5rem; font-weight: bolder;" id="anggaran"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-4">
+                      <div class="alert alert-primary">
+                        <strong>Total Realisasi</strong>
+                        <p style="font-size: 1.5rem; font-weight: bolder;" id="realisasi"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-4">
+                      <div class="alert alert-primary">
+                        <strong>% Realisasi</strong>
+                        <p style="font-size: 1.5rem; font-weight: bolder;" id="realisasi_tx"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 my-4">
+                    <div class="card card-outline card-success">
+                      <div class="card-header">
+                        <table id="myTable" class="table table-borderless table-sm table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Column 1</th>
+                                    <th>Column 2</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr>
+                                    <td>Row 1 Data 1</td>
+                                    <td>Row 1 Data 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Row 2 Data 1</td>
+                                    <td>Row 2 Data 2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready( function () {
+          
+          var table =  new DataTable('#myTable', {
+              searching: true,
+              ordering: true,
+              pagingType: 'input',
+              ajax: {
+                  url: './raws.json',
+                  dataSrc: ''
+              },
+              scrollX: true,
+              columns: [
+                  {
+                      data: 'nama_urusan', 
+                      title: 'Nama Urusan',
+                      width: '200px',
+                      render: function(data, type, row){
+                          return row.kode_urusan + ' - ' + data
+                      }
+                  },
+                  {
+                      data: 'nama_bid_urusan', 
+                      title: 'Nama Bidang Urusan',
+                      width: '200px',
+                  },
+                  {
+                      data: 'nama_fungsi', 
+                      title: 'Nama Fungsi',
+                      width: '150px',
+                  },
+                  {
+                      data: 'nama_skpd', 
+                      title: 'Nama SKPD',
+                      width: '200px',
+                  },
+                  {
+                      data: 'nama_program', 
+                      title: 'Nama Program',
+                      width: '200px',
+                      render: function(data, type, row){
+                          return row.kode_program + ' - ' + data
+                      }
+                  },
+                  {
+                      data: 'nama_kegiatan', 
+                      title: 'Nama Kegiatan',
+                      width: '200px',
+                      render: function(data, type, row){
+                          return row.kode_kegiatan + ' - ' + data
+                      }
+                  },
+                  {
+                      data: 'nama_sub_kegiatan', 
+                      title: 'Nama Sub Kegiatan',
+                      width: '200px',
+                      render: function(data, type, row){
+                          return row.kode_sub_kegiatan + ' - ' + data
+                      }
+                  },
+                  {
+                      data: 'nama_rekening', 
+                      title: 'Nama Rekening',
+                      width: '200px',
+                  },
+                  {
+                      data: 'alokasi_anggaran', 
+                      title: 'Alokasi Anggaran',
+                      width: '200px',
+                      // formatNumber: function (toFormat) {
+                      //     return thenumber.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+                      // },
+                      render: function(data, type){
+                        // return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                        return parseFloat(data)
+                      }
+                  },
+                  {
+                      data: 'realisasi_anggaran', 
+                      title: 'Realisasi',
+                      width: '200px',
+                      render: function(data, type){
+                        // return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                        return parseFloat(data)
+                      }
+                  },
+              ]
+          })
+
+          var data_raw = []
+          var sum = 0
+          var real = 0
+          
+         $.getJSON("./raws.json", function(data) {
+            sum = 0
+            real = 0
+            data_raw = data
+
+            data.forEach(el => {
+              sum += parseFloat(el.alokasi_anggaran)
+              real += parseFloat(el.realisasi_anggaran)
+            })
+            $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+            $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+            let prosen = (real/sum) * 100
+            $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+
+            var skpd = [...new Set(data.map(item => item.nama_skpd))].sort()
+            let select = $('<select class="form-select" style="width:100%;"><option value="">Pemerintah Kabupaten Blitar</option></select>')
+                            .appendTo($('#skpd_q')).select2()
+                            .on('change', function(){
+                              $('#keg_q').empty()
+                              let val = $(this).val()
+
+                              if(val != '') {
+                                let keg = $.grep(data, function(k, i){
+                                                return k.nama_skpd == val
+                                              })
+                                var kegiatan = [...new Set(keg.map(item => item.nama_program))].sort()
+                                let select = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
+                                              .appendTo($('#keg_q')).select2()
+                                $.each(kegiatan, function(k,i){
+                                    select.append('<option value="'+i+'">'+i+'</option>') 
+                                  })
+                              }
+
+                            })
+            $.each(skpd, function(k,i){
+              select.append('<option value="'+i+'">'+i+'</option>') 
+            })
+          })
+          .fail(function(error) {
+              alert('Gagal mengambil data!')
+          });
+
+          table.columns.adjust().draw();
+
+          $('#cari').on('click', function(){
+            let s = $('#skpd_q select').val()
+            let k = $('#keg_q select').val()
+            sum = 0
+            real = 0
+
+            if(s == ''){
+              data_raw.forEach(el => {
+                if(el.nama_skpd == s || s == ''){
+                  sum += parseFloat(el.alokasi_anggaran)
+                  real += parseFloat(el.realisasi_anggaran)
+                }
+              })
+              table.column(3).search(s).draw()
+            }else{
+              data_raw.forEach(el => {
+                if(el.nama_skpd == s && (el.nama_program == k || k == '')){
+                  sum += parseFloat(el.alokasi_anggaran)
+                  real += parseFloat(el.realisasi_anggaran)
+                }
+              })
+              table.column(3).search(s).column(4).search(k).draw()
+            }
+
+            $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+            $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+            let prosen = (real/sum) * 100
+            $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+
+            
+          })
+
+          $('#reset').on('click', function () {
+            $('#skpd_q select').val('').trigger("change");
+            let sum = 0
+            let real = 0
+
+            data_raw.forEach(el => {
+                sum += parseFloat(el.alokasi_anggaran)
+                real += parseFloat(el.realisasi_anggaran)
+              })
+
+            table.column(3).search('').draw()
+
+            $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+            $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+            let prosen = (real/sum) * 100
+            $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+          })
+
+        } );
+    </script>
+</body>
+</html>
