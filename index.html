@@ -73,93 +73,166 @@
     />
 
     <style>
-        #myTable_wrapper *{
+        #myTable_wrapper *,
+        #tabledetail_wrapper *{
             font-size: .75rem !important;
         }
-        #myTable_wrapper th {
+        #myTable_wrapper th,
+        #tabledetail_wrapper th {
             vertical-align: top !important;
             font-weight: bold !important;
+            background-color: #052c65 !important;
+            color: #fff !important;
+        }
+
+        .dt-layout-cell.dt-layout-full{
+          /* border: 1.5px solid #052c65; */
         }
         .dt-search{
           display: none !important;
         }
+        .bars {
+          height: 1rem;
+        }
+        .dt-length label {
+          margin: 10px !important;
+        }
+        .table-hover > tbody > tr:hover > *{
+          color: #fff !important;
+          background-color: #0d6efd !important;
+        }
+
+        .chartcv{
+          width: 100%; 
+          height: 60vh; 
+          position: relative;
+        }
+
+        @media screen and (max-width: 768px) and (orientation: landscape) {
+          .chartcv {
+            height: 60vw; 
+          }
+        }
     </style>
   </head>
 
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+<body class="fixed-header sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand bg-body" id="navigation" tabindex="-1">
+        <nav class="app-header navbar navbar-expand bg-body"  tabindex="-1">
             <!--begin::Container-->
             <div class="container-fluid">
               <!--begin::Start Navbar Links-->
               <ul class="navbar-nav" role="navigation" aria-label="Navigation 1">
-                <li class="nav-item">
-                  <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
-                    <i class="bi bi-list"></i>
-                  </a>
-                </li>
-                <li class="nav-item d-none d-md-block">
-                  <a href="#" class="nav-link">Home</a>
+                <li class="nav-item"><img src="./assets/img/Blitar.png" class="img-fluid" style="width: 30px; margin: 0 20px;" alt=""></li>
+                <li class="nav-item d-flex align-items-center">
+                  <span class="titles">Realisasi Pemerintah Daerah Kab. Blitar Th. 2026</span>
                 </li>
               </ul>
               <!--end::Start Navbar Links-->
-    
-              </ul>
-              <!--end::End Navbar Links-->
             </div>
             <!--end::Container-->
         </nav>
 
         <main class="app-main" id="main" tabindex="-1">
             <div class="app-content">
-              <div class="text-center my-4 alert alert-light">
-                <h3>Realisasi Pemerintah Daerah</h3>
-                <h3>Kabupaten Blitar</h3>
-                <h3>Tahun 2026</h3>
-              </div>
-                <div class="container-fluid">
-                  <div class="col-12 my-4">
-                    <div class="card card-outline card-danger">
-                      <div class="card-header">
-                        <div class="row">
-                          <div class="col-12">
-                            <div id="skpd_q" class="mb-2"></div>
-                            <div id="keg_q" class="mb-2"></div>
-                            
-                            <button class="btn btn-sm btn-success" id="cari"><i class="bi bi-search"></i>Cari</button>
-                            <button class="btn btn-sm btn-danger" id="reset"><i class="bi bi-arrow-clockwise"></i>Reset</button>
+              <div class="container-fluid">
+                <div class="row my-4">
 
+                  <div class="col-xl-12 col-md-12 mb-4">
+                    <div class="card card-primary">
+                      <div class="card-header">
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body" style="box-sizing: border-box; display: block;">
+
+                        <div class="">
+                          <!-- <div class="row">
+                            <div id="skpd_q" class="mb-2 "></div>
+                            <div id="prog_q" class="mb-2 "></div>
+                            <div id="keg_q" class="mb-2 "></div>
+                          </div> -->
+
+                          <div class="row my-2">
+                            <label class="form-label col-sm-2">Perangkat Daerah</label>
+                            <div class="col-sm-10" id="skpd_q"></div>
                           </div>
+                          <div class="row my-2">
+                            <label class="form-label col-sm-2">Program</label>
+                            <div class="col-sm-10" id="prog_q"></div>
+                          </div>
+                          <div class="row my-2">
+                            <label class="form-label col-sm-2">Kegiatan</label>
+                            <div class="col-sm-10" id="keg_q"></div>
+                          </div>
+                          <div class="row my-2">
+                            <label class="form-label col-sm-2"></label>
+                            <div class="col-sm-10">
+                              <button class="btn btn-sm btn-success" id="cari"><i class="bi bi-search me-2"></i>Cari</button>
+                              <button class="btn btn-sm btn-danger" id="reset"><i class="bi bi-arrow-clockwise me-2"></i>Reset</button>
+                            </div>
+                          </div>
+                          
                         </div>
+
                       </div>
                       <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                   </div>
-                  <div class="row text-center">
-                    <div class="col-4 ">
-                      <div class="alert alert-primary">
-                        <strong>Total Anggaran</strong>
-                        <p style="font-size: 1.5rem; font-weight: bolder;" id="anggaran"></p>
-                      </div>
-                    </div>
 
-                    <div class="col-4">
-                      <div class="alert alert-primary">
-                        <strong>Total Realisasi</strong>
-                        <p style="font-size: 1.5rem; font-weight: bolder;" id="realisasi"></p>
-                      </div>
-                    </div>
+                  <div class="col-12">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-4 col-xl-4">
+                          <div class="info-box text-bg-primary text-center">
+                            <div class="info-box-content">
+                              <p>Total Anggaran</p>
+                              <h3 id="anggaran" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                            </div>
+                          </div>
+                          <div class="info-box text-bg-success text-center">
+                            <div class="info-box-content">
+                              <p>Total Realisasi</p>
+                              <h3 id="realisasi" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                            </div>
+                          </div>
 
-                    <div class="col-4">
-                      <div class="alert alert-primary">
-                        <strong>% Realisasi</strong>
-                        <p style="font-size: 1.5rem; font-weight: bolder;" id="realisasi_tx"></p>
+                          <div class="card mb-3">
+                            <div class="card-header">
+                              <div class="d-flex justify-content-center ">
+                                <div style="" class="chartcv">
+                                  <canvas id="charts"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-md-4 col-xl-4 d-none">
+                          <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
+                            <div class="info-box-content">
+                              <p>Persentase Realisasi</p>
+                              <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xl-8 col-md-8">
+                          <div class="card ">
+                            <div class="card-header">
+                              <div>
+                                <table id="tabledetail" class="table table-borderless table-sm table-hover"></table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+      
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 my-4">
-                    <div class="card card-outline card-success">
+
+                  <div class="col-xl-12 col-md-12 my-4 d-none">
+                    <div class="card ">
                       <div class="card-header">
                         <table id="myTable" class="table table-borderless table-sm table-striped table-hover">
                             <thead>
@@ -185,6 +258,7 @@
                     <!-- /.card -->
                   </div>
                 </div>
+              </div>
             </div>
         </main>
     </div>
@@ -193,103 +267,190 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+    <script src="./js/adminlte.js"></script>
 
     <script>
         $(document).ready( function () {
+
+          var chartdata = [
+                              {label: 'Realisasi Anggaran', nilai: 0},
+                              {label: 'Sisa Anggaran', nilai: 100},
+                            ]
           
-          var table =  new DataTable('#myTable', {
-              searching: true,
-              ordering: true,
-              ajax: {
-                  url: './raws.json',
-                  dataSrc: ''
+          char = new Chart(
+            document.getElementById('charts').getContext('2d'),
+            {
+              type: 'doughnut',
+              data: {
+                labels: chartdata.map(row => row.label),
+                datasets: [
+                  {
+                    label: 'Total',
+                    data: chartdata.map(row => row.nilai),
+                    backgroundColor: [
+                      '#198754',
+                      '#551987',
+                    ],
+                    hoverOffset: 10
+                  }
+                ]
               },
-              scrollX: true,
-              columns: [
-                  {
-                      data: 'nama_urusan', 
-                      title: 'Nama Urusan',
-                      width: '200px',
-                      render: function(data, type, row){
-                          return row.kode_urusan + ' - ' + data
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 20
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 14
+                            },
+                            textAlign: 'center'
+                        }
+                    }
+                }
+              },
+              plugins: [{
+                id: 'centerText',
+                afterDatasetsDraw(chart, args, pluginOptions) {
+                  const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
+                  ctx.save();
+
+                  // 1. Calculate the exact center coordinates of the chart area
+                  const centerX = left + width / 2;
+                  const centerY = top + height / 2;
+
+                  // 2. Configure font styles
+                  ctx.font = '900 1.6rem Roboto,sans-serif';
+                  ctx.fillStyle = '#333333';
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'middle';
+
+                  // 3. Define and draw the text string
+                  var r = chart.data.datasets[0].data[0];
+                  var s = chart.data.datasets[0].data[1];
+                  var text = ((r/(r+s)) * 100).toFixed(2) + '%' 
+                  ctx.fillText(text, centerX, centerY);
+                  
+                  ctx.restore();
+                }
+              }]
+            }
+          );
+
+          var tdetail = new DataTable('#tabledetail',{
+            searching: false,
+            ordering: true,
+            paging: true,
+            scrollX: true,
+            // dom: 'rtip',
+            layout: {
+              top2Start: {pageLength: true},
+              top2End: function(){
+                let conta = $('<div class="cstbl"></div').addClass('d-flex align-items-center justify-content-center')
+                return conta
+              },
+              topStart: {info: true},
+              topEnd: {paging: true},
+            },
+            order: [[1, 'asc']],
+            ajax: {
+              url: '',
+              dataSrc: ''
+            },
+            columns: [
+              {
+                data: 'kode_urusan', 
+                title: '#',
+                width: '20px'
+              },
+              {
+                data: 'nama_skpd', 
+                title: 'Nama SKPD',
+                width: '200px'
+              },
+              {
+                data: 'nama_program', 
+                title: 'Nama Program',
+                width: '200px',
+                render: function(data, type, row){
+                    return row.kode_program + ' - ' + data
+                }
+              },
+              {
+                data: 'nama_kegiatan', 
+                title: 'Nama Kegiatan',
+                width: '300px',
+                render: function(data, type, row){
+                    return row.kode_kegiatan + ' - ' + data
+                }
+              },
+              {
+                data: 'nama_sub_kegiatan', 
+                title: 'Nama Sub Kegiatan',
+                width: '300px',
+                render: function(data, type, row){
+                    return row.kode_sub_kegiatan + ' - ' + data
+                }
+              },
+              {
+                data: 'nama_rekening', 
+                title: 'Nama Rekening',
+                width: '200px',
+              },
+              {
+                data: 'alokasi_anggaran',
+                title: 'Total Anggaran',
+                  width: '150px',
+                render: function(data, type){
+                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                        // return parseFloat(data)
                       }
-                  },
-                  {
-                      data: 'nama_bid_urusan', 
-                      title: 'Nama Bidang Urusan',
-                      width: '200px',
-                  },
-                  {
-                      data: 'nama_fungsi', 
-                      title: 'Nama Fungsi',
-                      width: '150px',
-                  },
-                  {
-                      data: 'nama_skpd', 
-                      title: 'Nama SKPD',
-                      width: '200px',
-                  },
-                  {
-                      data: 'nama_program', 
-                      title: 'Nama Program',
-                      width: '200px',
-                      render: function(data, type, row){
-                          return row.kode_program + ' - ' + data
+              },
+              {
+                data: 'realisasi_anggaran',
+                title: 'Total Realisasi',
+                width: '150px',
+                render: function(data, type){
+                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                        // return parseFloat(data)
                       }
-                  },
-                  {
-                      data: 'nama_kegiatan', 
-                      title: 'Nama Kegiatan',
-                      width: '200px',
-                      render: function(data, type, row){
-                          return row.kode_kegiatan + ' - ' + data
-                      }
-                  },
-                  {
-                      data: 'nama_sub_kegiatan', 
-                      title: 'Nama Sub Kegiatan',
-                      width: '200px',
-                      render: function(data, type, row){
-                          return row.kode_sub_kegiatan + ' - ' + data
-                      }
-                  },
-                  {
-                      data: 'nama_rekening', 
-                      title: 'Nama Rekening',
-                      width: '200px',
-                  },
-                  {
-                      data: 'alokasi_anggaran', 
-                      title: 'Alokasi Anggaran',
-                      width: '200px',
-                      // formatNumber: function (toFormat) {
-                      //     return thenumber.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-                      // },
-                      render: function(data, type){
-                        // return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-                        return parseFloat(data)
-                      }
-                  },
-                  {
-                      data: 'realisasi_anggaran', 
-                      title: 'Realisasi',
-                      width: '200px',
-                      render: function(data, type){
-                        // return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-                        return parseFloat(data)
-                      }
-                  },
-              ]
+              },
+            ],
+            on: {
+                    draw: (e) => {
+                        let start = e.dt.page.info().start;
+            
+                        e.dt.column(0, {page: 'current'})
+                            .nodes()
+                            .each((cell, i) => {
+                                cell.textContent = start + i + 1;
+                            });
+                    }
+                }
           })
+
+          //table here
 
           var data_raw = []
           var sum = 0
           var real = 0
+          var contes = 0
           
          $.getJSON("./raws.json", function(data) {
             sum = 0
             real = 0
             data_raw = data
+
+            tdetail.clear().rows.add(data_raw).draw();
+
+            contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
+            if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
+            $('.cstbl span').text(' / ' + contes)
 
             data.forEach(el => {
               sum += parseFloat(el.alokasi_anggaran)
@@ -299,27 +460,59 @@
             $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
             let prosen = (real/sum) * 100
             $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+              // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
+
+            char.data.datasets[0].data = [real, sum-real]
+            char.update()
 
             var skpd = [...new Set(data.map(item => item.nama_skpd))].sort()
+
             let select = $('<select class="form-select" style="width:100%;"><option value="">Pemerintah Kabupaten Blitar</option></select>')
                             .appendTo($('#skpd_q')).select2()
-                            .on('change', function(){
-                              $('#keg_q').empty()
-                              let val = $(this).val()
+            let selectb = $('<select class="form-select" style="width:100%;"><option value="">Pilih Program</option></select>')
+                            .appendTo($('#prog_q')).select2()
+            let selectc = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
+                            .appendTo($('#keg_q')).select2()
 
-                              if(val != '') {
-                                let keg = $.grep(data, function(k, i){
-                                                return k.nama_skpd == val
-                                              })
-                                var kegiatan = [...new Set(keg.map(item => item.nama_program))].sort()
-                                let select = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
-                                              .appendTo($('#keg_q')).select2()
-                                $.each(kegiatan, function(k,i){
-                                    select.append('<option value="'+i+'">'+i+'</option>') 
-                                  })
-                              }
+            select.on('change', function(){
+              // $('#prog_q').empty()
+              selectb.empty()
+              let val = $(this).val()
 
-                            })
+              if(val != '') {
+                let prg = $.grep(data, function(k, i){
+                                return k.nama_skpd == val
+                              })
+                var kegiatan = [...new Set(prg.map(item => item.nama_program))].sort()
+                // let select = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
+                              // .appendTo($('#prog_q')).select2()
+                selectb.append('<option value="">Pilih Program</option>')
+                $.each(kegiatan, function(k,i){
+                    var opts = new Option(i,i, false, false)
+                    selectb.append(opts) 
+                  })
+
+                selectb.on('change', function(k, i){
+                  selectc.empty()
+                  let val = $(this).val()
+                    selectc.append('<option value="">Pilih Kegiatan</option>')
+                  if(val != ''){
+                    let kgt = $.grep(data, function(k, i){
+                                return k.nama_skpd == select.val() && k.nama_program == val
+                              })
+                    var kegiatan = [...new Set(kgt.map(item => item.nama_kegiatan))].sort()
+                    $.each(kegiatan, function(k,i){
+                        var opts = new Option(i,i, false, false)
+                        selectc.append(opts) 
+                      })
+                  }
+
+                    selectc.trigger('change')
+                })
+              }
+              selectb.trigger('change')
+
+            })
             $.each(skpd, function(k,i){
               select.append('<option value="'+i+'">'+i+'</option>') 
             })
@@ -328,57 +521,110 @@
               alert('Gagal mengambil data!')
           });
 
-          table.columns.adjust().draw();
+          tdetail.columns.adjust().draw();
 
           $('#cari').on('click', function(){
             let s = $('#skpd_q select').val()
-            let k = $('#keg_q select').val()
+            let k = $('#prog_q select').val()
+            let k2 = $('#keg_q select').val()
             sum = 0
             real = 0
 
             if(s == ''){
+              let new_data = []
               data_raw.forEach(el => {
                 if(el.nama_skpd == s || s == ''){
+                  new_data.push(el)
                   sum += parseFloat(el.alokasi_anggaran)
                   real += parseFloat(el.realisasi_anggaran)
                 }
               })
-              table.column(3).search(s).draw()
+
+              tdetail.clear().rows.add(new_data).draw();
+
+              contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
+              if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
+              $('.cstbl span').text(' / ' + contes)
+
+              //tdetail.column(4).search(s).draw()
             }else{
+              let new_data = []
               data_raw.forEach(el => {
-                if(el.nama_skpd == s && (el.nama_program == k || k == '')){
+                if(el.nama_skpd == s && (el.nama_program == k || k == '') && (el.nama_kegiatan == k2 || k2 == '')){
+                  new_data.push(el)
                   sum += parseFloat(el.alokasi_anggaran)
                   real += parseFloat(el.realisasi_anggaran)
                 }
               })
-              table.column(3).search(s).column(4).search(k).draw()
+
+              tdetail.clear().rows.add(new_data).draw();
+
+              contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
+              if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
+              $('.cstbl span').text(' / ' + contes)
+
+              //tdetail.column(4).search(s).column(5).search(k).draw()
             }
 
             $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
             $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
             let prosen = (real/sum) * 100
             $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+              // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
 
-            
+            char.data.datasets[0].data = [real, sum-real]
+            char.update()
+
           })
 
           $('#reset').on('click', function () {
             $('#skpd_q select').val('').trigger("change");
+            $('#prog_q select').empty().append('<option value="">Pilih Program</option>').trigger("change");
+            $('#keg_q select').empty().append('<option value="">Pilih Kegiatan</option>').trigger("change");
             let sum = 0
             let real = 0
+            let new_data = []
 
             data_raw.forEach(el => {
+                new_data.push(el)
                 sum += parseFloat(el.alokasi_anggaran)
                 real += parseFloat(el.realisasi_anggaran)
               })
 
-            table.column(3).search('').draw()
+              tdetail.clear().rows.add(new_data).draw();
+              
+              contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
+              if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
+              $('.cstbl span').text(' / ' + contes)
+
+              // tdetail.column(4).search('').column(5).search('').draw()
 
             $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
             $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
             let prosen = (real/sum) * 100
             $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+              // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
+
+            char.data.datasets[0].data = [real, sum-real]
+            char.update()
+
           })
+
+          let inpi = $('<input style="width: 50px" />').addClass('form-input mx-2')
+          let butt = $('<button></button>').on('click', function(){
+            let v = parseInt(inpi.val(), 10)
+            if(!isNaN(v) && v > 0) tdetail.page(v-1).draw(false)
+            inpi.val('')
+          }).text('Go to page').addClass('btn btn-primary btn-sm')
+          
+          $('.cstbl').append('<label>Page </label>').append(inpi).append($('<span class=""></span>')).append(butt.addClass('mx-2'))
+
+
+          tdetail.on('length.dt', function (e, settings, len) {
+            contes = tdetail.page.info().recordsTotal / len
+            if(contes % len != 0) contes = Math.ceil(contes)
+            $('.cstbl span').text(' / ' + contes)
+          });
 
         } );
     </script>
