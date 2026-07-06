@@ -74,10 +74,14 @@
 
     <style>
         #myTable_wrapper *,
+        #tableANG_wrapper *,
+        #tableREA_wrapper *,
         #tabledetail_wrapper *{
             font-size: .75rem !important;
         }
         #myTable_wrapper th,
+        #tableANG_wrapper th,
+        #tableREA_wrapper th,
         #tabledetail_wrapper th {
             vertical-align: top !important;
             font-weight: bold !important;
@@ -85,9 +89,6 @@
             color: #fff !important;
         }
 
-        .dt-layout-cell.dt-layout-full{
-          /* border: 1.5px solid #052c65; */
-        }
         .dt-search{
           display: none !important;
         }
@@ -102,10 +103,24 @@
           background-color: #0d6efd !important;
         }
 
+        .subheading{
+          font-family: Roboto,Helvetica Neue,sans-serif !important; 
+          font-weight: bolder !important;
+        }
+
         .chartcv{
           width: 100%; 
           height: 60vh; 
           position: relative;
+        }
+        .accordion-button:not(.collapsed) {
+            color: #fff;
+            background-color: #0d6efd;
+            box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+        }
+        .accordion-button{
+          font-family: Roboto,Helvetica Neue,sans-serif !important; 
+          font-weight: bolder !important;
         }
 
         @media screen and (max-width: 768px) and (orientation: landscape) {
@@ -139,7 +154,7 @@
                 <div class="row my-4">
 
                   <div class="col-xl-12 col-md-12 mb-4">
-                    <div class="card card-primary">
+                    <div class="card card-danger">
                       <div class="card-header">
                       </div>
                       <!-- /.card-header -->
@@ -180,78 +195,221 @@
                     <!-- /.card -->
                   </div>
 
-                  <div class="col-12">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-4 col-xl-4">
-                          <div class="info-box text-bg-primary text-center">
-                            <div class="info-box-content">
-                              <p>Total Anggaran</p>
-                              <h3 id="anggaran" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
-                            </div>
-                          </div>
-                          <div class="info-box text-bg-success text-center">
-                            <div class="info-box-content">
-                              <p>Total Realisasi</p>
-                              <h3 id="realisasi" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
-                            </div>
-                          </div>
 
-                          <div class="card mb-3">
-                            <div class="card-header">
-                              <div class="d-flex justify-content-center ">
-                                <div style="" class="chartcv">
-                                  <canvas id="charts"></canvas>
+                  <div class="col-12 my-2">
+                    <div class="row">
+                      <div class="col-md-6 col-xl-6 col-lg-6">
+                        <div class="info-box text-bg-primary text-center">
+                          <div class="info-box-content">
+                            <p>Total Anggaran</p>
+                            <h3 id="anggaran" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-xl-6 col-lg-6">
+                        <div class="info-box text-bg-success text-center">
+                          <div class="info-box-content">
+                            <p>Total Realisasi</p>
+                            <h3 id="realisasi" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 mb-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6 col-xl-6">
+                            <div class="d-flex justify-content-center ">
+                              <div class="chartcv">
+                                <canvas id="charts"></canvas>
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div class="col-md-6 col-xl-4 d-none">
+                            <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
+                              <div class="info-box-content">
+                                <p>Persentase Realisasi</p>
+                                <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div class="col-md-6 col-xl-6">
+                            <div class="col-12 d-flex flex-wrap align-items-center" style="min-height: 60vh;">
+                              <div class="accordion accordion-flush" id="accordionFlushExample" style="flex: 0 0 100%">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header">
+                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                      Perangkat Daerah dengan Anggaran Tertinggi
+                                    </div>
+                                  </h2>
+                                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body" style="font-size: .8rem !important;">
+                                      <ol id="max_ang" class="list-group list-group-numbered list-group-flush">
+                                      </ol>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header">
+                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                      Perangkat Daerah dengan Anggaran Terendah
+                                    </div>
+                                  </h2>
+                                  <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body" style="font-size: .8rem !important;">
+                                      <ol id="min_ang" class="list-group list-group-numbered list-group-flush">
+                                      </ol>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header">
+                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                      Perangkat Daerah dengan % Realisasi Tertinggi
+                                    </div>
+                                  </h2>
+                                  <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body" style="font-size: .8rem !important;">
+                                      <ol id="max_re" class="list-group list-group-numbered list-group-flush">
+                                      </ol>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header">
+                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                      Perangkat Daerah dengan % Realisasi Terendah
+                                    </div>
+                                  </h2>
+                                  <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body" style="font-size: .8rem !important;">
+                                      <ol id="min_re" class="list-group list-group-numbered list-group-flush">
+                                      </ol>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="col-12 mt-4">
+                    <div class="card ">
+                      <div class="card-header">
+                        <div>
+                          <table id="tabledetail" class="table table-borderless table-sm table-hover"></table>
                         </div>
-                        <div class="col-md-4 col-xl-4 d-none">
-                          <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
-                            <div class="info-box-content">
-                              <p>Persentase Realisasi</p>
-                              <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-xl-8 col-md-8">
-                          <div class="card ">
-                            <div class="card-header">
-                              <div>
-                                <table id="tabledetail" class="table table-borderless table-sm table-hover"></table>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-      
                       </div>
                     </div>
                   </div>
 
                   <div class="col-xl-12 col-md-12 my-4 d-none">
-                    <div class="card ">
-                      <div class="card-header">
-                        <table id="myTable" class="table table-borderless table-sm table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr>
-                                    <td>Row 1 Data 1</td>
-                                    <td>Row 1 Data 2</td>
-                                </tr>
-                                <tr>
-                                    <td>Row 2 Data 1</td>
-                                    <td>Row 2 Data 2</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card">
+                      <div class="card-body m-0">
+                        <div class="row" style="font-size: .8rem !important;">
+
+                          <div class="col-sm-6 col-md-3 my-4">
+                            <div class="card card-primary">
+                              <div class="card-header">
+                                <label class="subheading">Perangkat Daerah dengan Anggaran Tertinggi</label>
+                              </div>
+                              <div class="card-body">
+                                <ol id="max_ang" class="list-group list-group-numbered list-group-flush">
+                                </ol>
+                              </div>
+                              <!-- /.card-body -->
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3 my-4">
+                            <div class="card card-danger">
+                              <div class="card-header" style="background-color: #084298 !important;">
+                                <label class="subheading">Perangkat Daerah dengan Anggaran Terendah</label>
+                              </div>
+                              <div class="card-body">
+                                <ol id="min_ang" class="list-group list-group-numbered list-group-flush">
+                                </ol>
+                              </div>
+                              <!-- /.card-body -->
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3 my-4">
+                            <div class="card card-success">
+                              <div class="card-header">
+                                <label class="subheading">Perangkat Daerah dengan % Realisasi Tertinggi</label>
+                              </div>
+                              <div class="card-body">
+                                <ol id="max_re" class="list-group list-group-numbered list-group-flush">
+                                </ol>
+                              </div>
+                              <!-- /.card-body -->
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3 my-4">
+                            <div class="card card-danger">
+                              <div class="card-header" style="background-color: #0f5132 !important;">
+                                <label class="subheading">Perangkat Daerah dengan % Realisasi Terendah</label>
+                              </div>
+                              <div class="card-body">
+                                <ol id="min_re" class="list-group list-group-numbered list-group-flush">
+                                </ol>
+                              </div>
+                              <!-- /.card-body -->
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="row d-none">
+                          <div class="col-md-6">
+                            <h5>Total Anggaran per Perangkat Daerah</h5>
+                            <table id="tableANG" class="table table-borderless table-sm table-striped">
+                              <thead>
+                                  <tr>
+                                      <th>Column 1</th>
+                                      <th>Column 2</th>
+                                  </tr>
+                              </thead>
+                              <tbody class="table-group-divider">
+                                  <tr>
+                                      <td>Row 1 Data 1</td>
+                                      <td>Row 1 Data 2</td>
+                                  </tr>
+                                  <tr>
+                                      <td>Row 2 Data 1</td>
+                                      <td>Row 2 Data 2</td>
+                                  </tr>
+                              </tbody>
+                           </table>
+                          </div>
+                          <div class="col-md-6">
+                            <h5>Total Realisasi per Perangkat Daerah</h5>
+                            <table id="tableREA" class="table table-borderless table-sm table-striped">
+                              <thead>
+                                  <tr>
+                                      <th>Column 1</th>
+                                      <th>Column 2</th>
+                                  </tr>
+                              </thead>
+                              <tbody class="table-group-divider">
+                                  <tr>
+                                      <td>Row 1 Data 1</td>
+                                      <td>Row 1 Data 2</td>
+                                  </tr>
+                                  <tr>
+                                      <td>Row 2 Data 1</td>
+                                      <td>Row 2 Data 2</td>
+                                  </tr>
+                              </tbody>
+                           </table>
+                          </div>
+                        </div>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -289,8 +447,8 @@
                     label: 'Total',
                     data: chartdata.map(row => row.nilai),
                     backgroundColor: [
-                      '#198754',
-                      '#551987',
+                      '#20c997',
+                      '#c92052',
                     ],
                     hoverOffset: 10
                   }
@@ -300,16 +458,18 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 layout: {
-                    padding: 20
+                    padding: 10
                 },
                 plugins: {
                     legend: {
+                        position: 'bottom',
                         labels: {
                             // This more specific font property overrides the global property
                             font: {
                                 size: 14
                             },
-                            textAlign: 'center'
+                            textAlign: 'center',
+                            padding: 30
                         }
                     }
                 }
@@ -434,9 +594,100 @@
                 }
           })
 
+          var tang = new DataTable('#tableANG',{
+            searching: false,
+            order: [[2, 'desc']],
+            ajax: {
+              url: '',
+              dataSrc: ''
+            },
+            columns: [
+              {
+                data: 'nama_skpd', 
+                title: '#',
+                width: '50px'
+              },
+              {
+                data: 'nama_skpd', 
+                title: 'Nama SKPD',
+                width: '200px'
+              },
+              {
+                data: 'anggaran',
+                title: 'Total Anggaran',
+                  width: '150px',
+                render: function(data, type){
+                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                        // return parseFloat(data)
+                      }
+              },
+            ],
+            on: {
+                    draw: (e) => {
+                        let start = e.dt.page.info().start;
+            
+                        e.dt.column(0, {page: 'current'})
+                            .nodes()
+                            .each((cell, i) => {
+                                cell.textContent = start + i + 1;
+                            });
+                    }
+                }
+          })
+
+          var trea = new DataTable('#tableREA',{
+            searching: false,
+            order: [[3, 'desc']],
+            ajax: {
+              url: '',
+              dataSrc: ''
+            },
+            columns: [
+              {
+                data: 'nama_skpd', 
+                title: '#',
+                width: '50px'
+              },
+              {
+                data: 'nama_skpd', 
+                title: 'Nama SKPD',
+                width: '200px'
+              },
+              {
+                data: 'realisasi',
+                title: 'Total Realisasi',
+                  width: '150px',
+                render: function(data, type){
+                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                        // return parseFloat(data)
+                      }
+              },
+              {
+                data: 'realisasi',
+                title: '% Realisasi',
+                  width: '80px',
+                render: function(data, type, row){
+                        return ((parseFloat(data) / parseFloat(row.anggaran)) * 100).toFixed(2) + '%'
+                      }
+              },
+            ],
+            on: {
+                    draw: (e) => {
+                        let start = e.dt.page.info().start;
+            
+                        e.dt.column(0, {page: 'current'})
+                            .nodes()
+                            .each((cell, i) => {
+                                cell.textContent = start + i + 1;
+                            });
+                    }
+                }
+          })
+
           //table here
 
           var data_raw = []
+          var skpdi = []
           var sum = 0
           var real = 0
           var contes = 0
@@ -466,6 +717,88 @@
             char.update()
 
             var skpd = [...new Set(data.map(item => item.nama_skpd))].sort()
+
+            skpd.forEach(el => {
+              skpdi.push({
+                nama_skpd: el,
+                anggaran: 0,
+                realisasi: 0,
+                persen: 0,
+              })
+            })
+
+            data_raw.forEach(el => {
+              let sk = skpdi.findIndex(obj => obj.nama_skpd === el.nama_skpd);
+              skpdi[sk].anggaran += parseFloat(el.alokasi_anggaran)
+              skpdi[sk].realisasi += parseFloat(el.realisasi_anggaran)
+              skpdi[sk].persen = ((skpdi[sk].realisasi / skpdi[sk].anggaran) * 100).toFixed(2)
+            })
+            
+            let max_ang = $('#max_ang')
+            let min_ang = $('#min_ang')
+            let max_re = $('#max_re')
+            let min_re = $('#min_re')
+            let cn = 0
+
+            skpdi.sort((a, b) => b.anggaran - a.anggaran).forEach(el => {
+              if(cn < 5){
+                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+                let me = $('<div></div>').addClass('ms-2 me-auto')
+                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+                me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+                ol.append(me)
+                max_ang.append(ol)
+
+                cn++
+              }
+            })
+            cn = 0
+            skpdi.sort((a, b) => a.anggaran - b.anggaran).forEach(el => {
+              if(cn < 5){
+                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+                let me = $('<div></div>').addClass('ms-2 me-auto')
+                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+                me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+                ol.append(me)
+                min_ang.append(ol)
+
+                cn++
+              }
+            })
+            cn = 0
+
+            skpdi.sort((a, b) => b.persen - a.persen).forEach(el => {
+              if(cn < 5){
+                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+                let me = $('<div></div>').addClass('ms-2 me-auto')
+                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+                me.append(subh, el.persen + '%')
+                ol.append(me)
+                max_re.append(ol)
+
+                cn++
+              }
+            })
+            cn = 0
+            skpdi.sort((a, b) => a.persen - b.persen).forEach(el => {
+              if(cn < 5){
+                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+                let me = $('<div></div>').addClass('ms-2 me-auto')
+                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+                me.append(subh, el.persen + '%')
+                ol.append(me)
+                min_re.append(ol)
+
+                cn++
+              }
+            })
+
+            // tang.clear().rows.add(skpdi.sort((a, b) => b.anggaran - a.anggaran)).draw();
+            // trea.clear().rows.add(skpdi.sort((a, b) => b.realisasi - a.realisasi)).draw();
 
             let select = $('<select class="form-select" style="width:100%;"><option value="">Pemerintah Kabupaten Blitar</option></select>')
                             .appendTo($('#skpd_q')).select2()
