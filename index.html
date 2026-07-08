@@ -747,60 +747,48 @@
           let cn = 0
 
           skpdi.sort((a, b) => b.anggaran - a.anggaran).forEach(el => {
+            let compi = []
             if(cn < 5){
-              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-              let me = $('<div></div>').addClass('ms-2 me-auto')
-              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-              me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-              ol.append(me)
-              max_ang.append(ol)
-
+              compi.push('<ol class="list-group-item d-flex justify-content-between align-items-start"><div class="ms-2 me-auto"><div class="subheading">'+el.nama_skpd+'</div>'+'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'</div></ol>')
               cn++
+            }else{
+              return false
             }
+            max_ang.append(compi.join(''))
           })
           cn = 0
           skpdi.sort((a, b) => a.anggaran - b.anggaran).forEach(el => {
+            let compi = []
             if(cn < 5){
-              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-              let me = $('<div></div>').addClass('ms-2 me-auto')
-              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-              me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-              ol.append(me)
-              min_ang.append(ol)
-
+              compi.push('<ol class="list-group-item d-flex justify-content-between align-items-start"><div class="ms-2 me-auto"><div class="subheading">'+el.nama_skpd+'</div>'+'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'</div></ol>')
               cn++
+            }else{
+              return false
             }
+            min_ang.append(compi.join(''))
           })
           cn = 0
 
           skpdi.sort((a, b) => b.persen - a.persen).forEach(el => {
+            let compi = []
             if(cn < 5){
-              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-              let me = $('<div></div>').addClass('ms-2 me-auto')
-              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-              me.append(subh, el.persen + '%')
-              ol.append(me)
-              max_re.append(ol)
-
+              compi.push('<ol class="list-group-item d-flex justify-content-between align-items-start"><div class="ms-2 me-auto"><div class="subheading">'+el.nama_skpd+'</div>'+'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'</div></ol>')
               cn++
+            }else{
+              return false
             }
+            max_re.append(compi.join(''))
           })
           cn = 0
           skpdi.sort((a, b) => a.persen - b.persen).forEach(el => {
+            let compi = []
             if(cn < 5){
-              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-              let me = $('<div></div>').addClass('ms-2 me-auto')
-              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-              me.append(subh, el.persen + '%')
-              ol.append(me)
-              min_re.append(ol)
-
+              compi.push('<ol class="list-group-item d-flex justify-content-between align-items-start"><div class="ms-2 me-auto"><div class="subheading">'+el.nama_skpd+'</div>'+'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'</div></ol>')
               cn++
+            }else{
+              return false
             }
+            min_re.append(compi.join(''))
           })
 
           // tang.clear().rows.add(skpdi.sort((a, b) => b.anggaran - a.anggaran)).draw();
