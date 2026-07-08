@@ -99,8 +99,19 @@
           margin: 10px !important;
         }
         .table-hover > tbody > tr:hover > *{
-          color: #fff !important;
-          background-color: #0d6efd !important;
+          background-color: var(--bs-primary-bg-subtle) !important;
+        }
+
+        div.dt-container .dt-paging .dt-paging-button:hover {
+          background: linear-gradient(to bottom, #0a58ca 0%, #084298 100%);
+        }
+
+        .boxy {
+          border: 2px solid var(--lte-card-variant-bg);
+        }
+
+        .accordion-button:hover{
+          background-color: var(--bs-primary-bg-subtle);
         }
 
         .subheading{
@@ -153,8 +164,8 @@
               <div class="container-fluid">
                 <div class="row my-4">
 
-                  <div class="col-xl-12 col-md-12 mb-4">
-                    <div class="card card-danger">
+                  <div class="col-xl-12 col-md-12">
+                    <div class="card card-danger boxy">
                       <div class="card-header">
                       </div>
                       <!-- /.card-header -->
@@ -196,7 +207,7 @@
                   </div>
 
 
-                  <div class="col-12 my-2">
+                  <div class="col-12 g-4">
                     <div class="row">
                       <div class="col-md-6 col-xl-6 col-lg-6">
                         <div class="info-box text-bg-primary text-center">
@@ -217,28 +228,32 @@
                     </div>
                   </div>
 
-                  <div class="col-12 mb-2">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-6 col-xl-6">
+                  <div class="col-12 ">
+                    <div class="row g-4">
+                      <div class="col-md-6 col-xl-6">
+                        <div class="card boxy card-secondary">
+                          <div class="card-body">
                             <div class="d-flex justify-content-center ">
                               <div class="chartcv">
                                 <canvas id="charts"></canvas>
                               </div>
                             </div>
                           </div>
-  
-                          <div class="col-md-6 col-xl-4 d-none">
-                            <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
-                              <div class="info-box-content">
-                                <p>Persentase Realisasi</p>
-                                <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
-                              </div>
-                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-xl-4 d-none">
+                        <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
+                          <div class="info-box-content">
+                            <p>Persentase Realisasi</p>
+                            <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
                           </div>
-  
-                          <div class="col-md-6 col-xl-6">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-xl-6">
+                        <div class="card boxy card-secondary">
+                          <div class="card-body">
                             <div class="col-12 d-flex flex-wrap align-items-center" style="min-height: 60vh;">
                               <div class="accordion accordion-flush" id="accordionFlushExample" style="flex: 0 0 100%">
                                 <div class="accordion-item">
@@ -531,12 +546,12 @@
               {
                 data: 'nama_skpd', 
                 title: 'Nama SKPD',
-                width: '200px'
+                width: '150px'
               },
               {
                 data: 'nama_program', 
                 title: 'Nama Program',
-                width: '200px',
+                width: '150px',
                 render: function(data, type, row){
                     return row.kode_program + ' - ' + data
                 }
@@ -544,7 +559,7 @@
               {
                 data: 'nama_kegiatan', 
                 title: 'Nama Kegiatan',
-                width: '300px',
+                width: '200px',
                 render: function(data, type, row){
                     return row.kode_kegiatan + ' - ' + data
                 }
@@ -552,7 +567,7 @@
               {
                 data: 'nama_sub_kegiatan', 
                 title: 'Nama Sub Kegiatan',
-                width: '300px',
+                width: '200px',
                 render: function(data, type, row){
                     return row.kode_sub_kegiatan + ' - ' + data
                 }
@@ -565,7 +580,8 @@
               {
                 data: 'alokasi_anggaran',
                 title: 'Total Anggaran',
-                  width: '150px',
+                className: '',
+                width: '150px',
                 render: function(data, type){
                         return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                         // return parseFloat(data)
@@ -946,7 +962,9 @@
           let inpi = $('<input style="width: 50px" />').addClass('form-input mx-2')
           let butt = $('<button></button>').on('click', function(){
             let v = parseInt(inpi.val(), 10)
-            if(!isNaN(v) && v > 0) tdetail.page(v-1).draw(false)
+            if(!isNaN(v) && v > 0) {
+              tdetail.page(v-1).draw(false)
+            }
             inpi.val('')
           }).text('Go to page').addClass('btn btn-primary btn-sm')
           
@@ -958,6 +976,7 @@
             if(contes % len != 0) contes = Math.ceil(contes)
             $('.cstbl span').text(' / ' + contes)
           });
+
 
         } );
     </script>
