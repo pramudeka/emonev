@@ -134,6 +134,94 @@
           font-weight: bolder !important;
         }
 
+        .fullscreen-overlay {
+          position: fixed; /* Sit on top of the page content */
+          width: 100%; /* Full width (cover the whole page) */
+          height: 100%; /* Full height (cover the whole page) */
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgb(255 255 255);
+          z-index: 9999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .fullscreen-overlay .loader {
+          --color-1: #6085D7;
+          --color-2: #F2F2F2;
+          --color-3: #6B9BF8;
+          --color-4: rgba(42, 32, 223, 0.71);
+          --color-5: #fff;
+          --size: 1px;
+
+          width: calc(200 * var(--size));
+          height: calc(140 * var(--size));
+          background: var(--color-1);
+          box-sizing: border-box;
+          position: relative;
+          border-radius: calc(8 * var(--size));
+          perspective: calc(1000 * var(--size));
+        }
+
+        .fullscreen-overlay .loader:before {
+          content: '';
+          position: absolute;
+          left: calc(10 * var(--size));
+          right: calc(10 * var(--size));
+          top: calc(10 * var(--size));
+          bottom: calc(10 * var(--size));
+          border-radius: calc(8 * var(--size));
+          background: var(--color-2) no-repeat;
+          background-size: calc(60 * var(--size)) calc(10 * var(--size));
+          background-image:
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0);
+
+          background-position:
+            calc(15 * var(--size)) calc(30 * var(--size)),
+            calc(15 * var(--size)) calc(60 * var(--size)),
+            calc(15 * var(--size)) calc(90 * var(--size)),
+            calc(105 * var(--size)) calc(30 * var(--size)),
+            calc(105 * var(--size)) calc(60 * var(--size)),
+            calc(105 * var(--size)) calc(90 * var(--size));
+          box-shadow: 0 0 calc(10 * var(--size)) var(--color-4);
+        }
+        .fullscreen-overlay .loader:after {
+          content: '';
+          position: absolute;
+          width: calc(50% - calc(10 * var(--size)));
+          right: calc(10 * var(--size));
+          top: calc(10 * var(--size));
+          bottom: calc(10 * var(--size));
+          border-radius: calc(8 * var(--size));
+          background: var(--color-5) no-repeat;
+          background-size: calc(60 * var(--size)) calc(10 * var(--size));
+          background-image:
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+            linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0);
+          background-position:
+            50% calc(30 * var(--size)),
+            50% calc(60 * var(--size)),
+            50% calc(90 * var(--size));
+          transform: rotateY(0deg);
+          transform-origin: left center;
+          animation: paging 1s linear infinite !important;
+        }
+
+        @keyframes paging {
+          to {
+            transform: rotateY(-180deg);
+          }
+        }
+
         @media screen and (max-width: 768px) and (orientation: landscape) {
           .chartcv {
             height: 60vw; 
@@ -143,169 +231,173 @@
   </head>
 
 <body class="fixed-header sidebar-expand-lg bg-body-tertiary">
-    <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand bg-body"  tabindex="-1">
-            <!--begin::Container-->
+
+  <div class="fullscreen-overlay">
+    <span class="loader"></span>
+  </div>
+  
+  <div class="app-wrapper">
+      <nav class="app-header navbar navbar-expand bg-body"  tabindex="-1">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Start Navbar Links-->
+            <ul class="navbar-nav" role="navigation" aria-label="Navigation 1">
+              <li class="nav-item"><img src="./assets/img/Blitar.png" class="img-fluid" style="width: 30px; margin: 0 20px;" alt=""></li>
+              <li class="nav-item d-flex align-items-center">
+                <span class="titles">Realisasi Pemerintah Daerah Kab. Blitar Th. 2026</span>
+              </li>
+            </ul>
+            <!--end::Start Navbar Links-->
+          </div>
+          <!--end::Container-->
+      </nav>
+
+      <main class="app-main" id="main" tabindex="-1">
+          <div class="app-content">
             <div class="container-fluid">
-              <!--begin::Start Navbar Links-->
-              <ul class="navbar-nav" role="navigation" aria-label="Navigation 1">
-                <li class="nav-item"><img src="./assets/img/Blitar.png" class="img-fluid" style="width: 30px; margin: 0 20px;" alt=""></li>
-                <li class="nav-item d-flex align-items-center">
-                  <span class="titles">Realisasi Pemerintah Daerah Kab. Blitar Th. 2026</span>
-                </li>
-              </ul>
-              <!--end::Start Navbar Links-->
-            </div>
-            <!--end::Container-->
-        </nav>
+              <div class="row my-4">
 
-        <main class="app-main" id="main" tabindex="-1">
-            <div class="app-content">
-              <div class="container-fluid">
-                <div class="row my-4">
+                <div class="col-xl-12 col-md-12">
+                  <div class="card card-danger boxy">
+                    <div class="card-header">
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="box-sizing: border-box; display: block;">
 
-                  <div class="col-xl-12 col-md-12">
-                    <div class="card card-danger boxy">
-                      <div class="card-header">
+                      <div class="">
+                        <!-- <div class="row">
+                          <div id="skpd_q" class="mb-2 "></div>
+                          <div id="prog_q" class="mb-2 "></div>
+                          <div id="keg_q" class="mb-2 "></div>
+                        </div> -->
+
+                        <div class="row my-2">
+                          <label class="form-label col-sm-2">Perangkat Daerah</label>
+                          <div class="col-sm-10" id="skpd_q"></div>
+                        </div>
+                        <div class="row my-2">
+                          <label class="form-label col-sm-2">Program</label>
+                          <div class="col-sm-10" id="prog_q"></div>
+                        </div>
+                        <div class="row my-2">
+                          <label class="form-label col-sm-2">Kegiatan</label>
+                          <div class="col-sm-10" id="keg_q"></div>
+                        </div>
+                        <div class="row my-2">
+                          <label class="form-label col-sm-2"></label>
+                          <div class="col-sm-10">
+                            <button class="btn btn-sm btn-success" id="cari"><i class="bi bi-search me-2"></i>Cari</button>
+                            <button class="btn btn-sm btn-danger" id="reset"><i class="bi bi-arrow-clockwise me-2"></i>Reset</button>
+                          </div>
+                        </div>
+                        
                       </div>
-                      <!-- /.card-header -->
-                      <div class="card-body" style="box-sizing: border-box; display: block;">
 
-                        <div class="">
-                          <!-- <div class="row">
-                            <div id="skpd_q" class="mb-2 "></div>
-                            <div id="prog_q" class="mb-2 "></div>
-                            <div id="keg_q" class="mb-2 "></div>
-                          </div> -->
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                </div>
 
-                          <div class="row my-2">
-                            <label class="form-label col-sm-2">Perangkat Daerah</label>
-                            <div class="col-sm-10" id="skpd_q"></div>
-                          </div>
-                          <div class="row my-2">
-                            <label class="form-label col-sm-2">Program</label>
-                            <div class="col-sm-10" id="prog_q"></div>
-                          </div>
-                          <div class="row my-2">
-                            <label class="form-label col-sm-2">Kegiatan</label>
-                            <div class="col-sm-10" id="keg_q"></div>
-                          </div>
-                          <div class="row my-2">
-                            <label class="form-label col-sm-2"></label>
-                            <div class="col-sm-10">
-                              <button class="btn btn-sm btn-success" id="cari"><i class="bi bi-search me-2"></i>Cari</button>
-                              <button class="btn btn-sm btn-danger" id="reset"><i class="bi bi-arrow-clockwise me-2"></i>Reset</button>
+
+                <div class="col-12 g-4">
+                  <div class="row">
+                    <div class="col-md-6 col-xl-6 col-lg-6">
+                      <div class="info-box text-bg-primary text-center">
+                        <div class="info-box-content">
+                          <p>Total Anggaran</p>
+                          <h3 id="anggaran" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-6 col-lg-6">
+                      <div class="info-box text-bg-success text-center">
+                        <div class="info-box-content">
+                          <p>Total Realisasi</p>
+                          <h3 id="realisasi" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 ">
+                  <div class="row g-4">
+                    <div class="col-md-6 col-xl-6">
+                      <div class="card boxy card-secondary">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-center ">
+                            <div class="chartcv">
+                              <canvas id="charts"></canvas>
                             </div>
                           </div>
-                          
-                        </div>
-
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                  </div>
-
-
-                  <div class="col-12 g-4">
-                    <div class="row">
-                      <div class="col-md-6 col-xl-6 col-lg-6">
-                        <div class="info-box text-bg-primary text-center">
-                          <div class="info-box-content">
-                            <p>Total Anggaran</p>
-                            <h3 id="anggaran" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6 col-xl-6 col-lg-6">
-                        <div class="info-box text-bg-success text-center">
-                          <div class="info-box-content">
-                            <p>Total Realisasi</p>
-                            <h3 id="realisasi" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
-                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="col-12 ">
-                    <div class="row g-4">
-                      <div class="col-md-6 col-xl-6">
-                        <div class="card boxy card-secondary">
-                          <div class="card-body">
-                            <div class="d-flex justify-content-center ">
-                              <div class="chartcv">
-                                <canvas id="charts"></canvas>
+                    <div class="col-md-6 col-xl-4 d-none">
+                      <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
+                        <div class="info-box-content">
+                          <p>Persentase Realisasi</p>
+                          <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-6">
+                      <div class="card boxy card-secondary">
+                        <div class="card-body">
+                          <div class="col-12 d-flex flex-wrap align-items-center" style="min-height: 60vh;">
+                            <div class="accordion accordion-flush" id="accordionFlushExample" style="flex: 0 0 100%">
+                              <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                  <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Perangkat Daerah dengan Anggaran Tertinggi
+                                  </div>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                  <div class="accordion-body" style="font-size: .8rem !important;">
+                                    <ol id="max_ang" class="list-group list-group-numbered list-group-flush">
+                                    </ol>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 col-xl-4 d-none">
-                        <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
-                          <div class="info-box-content">
-                            <p>Persentase Realisasi</p>
-                            <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 col-xl-6">
-                        <div class="card boxy card-secondary">
-                          <div class="card-body">
-                            <div class="col-12 d-flex flex-wrap align-items-center" style="min-height: 60vh;">
-                              <div class="accordion accordion-flush" id="accordionFlushExample" style="flex: 0 0 100%">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                      Perangkat Daerah dengan Anggaran Tertinggi
-                                    </div>
-                                  </h2>
-                                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body" style="font-size: .8rem !important;">
-                                      <ol id="max_ang" class="list-group list-group-numbered list-group-flush">
-                                      </ol>
-                                    </div>
+                              <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                  <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    Perangkat Daerah dengan Anggaran Terendah
+                                  </div>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                  <div class="accordion-body" style="font-size: .8rem !important;">
+                                    <ol id="min_ang" class="list-group list-group-numbered list-group-flush">
+                                    </ol>
                                   </div>
                                 </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                      Perangkat Daerah dengan Anggaran Terendah
-                                    </div>
-                                  </h2>
-                                  <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body" style="font-size: .8rem !important;">
-                                      <ol id="min_ang" class="list-group list-group-numbered list-group-flush">
-                                      </ol>
-                                    </div>
+                              </div>
+                              <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                  <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    Perangkat Daerah dengan % Realisasi Tertinggi
+                                  </div>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                  <div class="accordion-body" style="font-size: .8rem !important;">
+                                    <ol id="max_re" class="list-group list-group-numbered list-group-flush">
+                                    </ol>
                                   </div>
                                 </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                      Perangkat Daerah dengan % Realisasi Tertinggi
-                                    </div>
-                                  </h2>
-                                  <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body" style="font-size: .8rem !important;">
-                                      <ol id="max_re" class="list-group list-group-numbered list-group-flush">
-                                      </ol>
-                                    </div>
+                              </div>
+                              <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                  <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                    Perangkat Daerah dengan % Realisasi Terendah
                                   </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                      Perangkat Daerah dengan % Realisasi Terendah
-                                    </div>
-                                  </h2>
-                                  <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body" style="font-size: .8rem !important;">
-                                      <ol id="min_re" class="list-group list-group-numbered list-group-flush">
-                                      </ol>
-                                    </div>
+                                </h2>
+                                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                  <div class="accordion-body" style="font-size: .8rem !important;">
+                                    <ol id="min_re" class="list-group list-group-numbered list-group-flush">
+                                    </ol>
                                   </div>
                                 </div>
                               </div>
@@ -315,670 +407,675 @@
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div class="col-12 mt-4">
-                    <div class="card ">
-                      <div class="card-header">
-                        <div>
-                          <table id="tabledetail" class="table table-borderless table-sm table-hover"></table>
-                        </div>
+                <div class="col-12 mt-4">
+                  <div class="card ">
+                    <div class="card-header">
+                      <div>
+                        <table id="tabledetail" class="table table-borderless table-sm table-hover"></table>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div class="col-xl-12 col-md-12 my-4 d-none">
-                    <div class="card">
-                      <div class="card-body m-0">
-                        <div class="row" style="font-size: .8rem !important;">
+                <div class="col-xl-12 col-md-12 my-4 d-none">
+                  <div class="card">
+                    <div class="card-body m-0">
+                      <div class="row" style="font-size: .8rem !important;">
 
-                          <div class="col-sm-6 col-md-3 my-4">
-                            <div class="card card-primary">
-                              <div class="card-header">
-                                <label class="subheading">Perangkat Daerah dengan Anggaran Tertinggi</label>
-                              </div>
-                              <div class="card-body">
-                                <ol id="max_ang" class="list-group list-group-numbered list-group-flush">
-                                </ol>
-                              </div>
-                              <!-- /.card-body -->
+                        <div class="col-sm-6 col-md-3 my-4">
+                          <div class="card card-primary">
+                            <div class="card-header">
+                              <label class="subheading">Perangkat Daerah dengan Anggaran Tertinggi</label>
                             </div>
-                          </div>
-                          <div class="col-sm-6 col-md-3 my-4">
-                            <div class="card card-danger">
-                              <div class="card-header" style="background-color: #084298 !important;">
-                                <label class="subheading">Perangkat Daerah dengan Anggaran Terendah</label>
-                              </div>
-                              <div class="card-body">
-                                <ol id="min_ang" class="list-group list-group-numbered list-group-flush">
-                                </ol>
-                              </div>
-                              <!-- /.card-body -->
+                            <div class="card-body">
+                              <ol id="max_ang" class="list-group list-group-numbered list-group-flush">
+                              </ol>
                             </div>
+                            <!-- /.card-body -->
                           </div>
-                          <div class="col-sm-6 col-md-3 my-4">
-                            <div class="card card-success">
-                              <div class="card-header">
-                                <label class="subheading">Perangkat Daerah dengan % Realisasi Tertinggi</label>
-                              </div>
-                              <div class="card-body">
-                                <ol id="max_re" class="list-group list-group-numbered list-group-flush">
-                                </ol>
-                              </div>
-                              <!-- /.card-body -->
-                            </div>
-                          </div>
-                          <div class="col-sm-6 col-md-3 my-4">
-                            <div class="card card-danger">
-                              <div class="card-header" style="background-color: #0f5132 !important;">
-                                <label class="subheading">Perangkat Daerah dengan % Realisasi Terendah</label>
-                              </div>
-                              <div class="card-body">
-                                <ol id="min_re" class="list-group list-group-numbered list-group-flush">
-                                </ol>
-                              </div>
-                              <!-- /.card-body -->
-                            </div>
-                          </div>
-
                         </div>
-                        <div class="row d-none">
-                          <div class="col-md-6">
-                            <h5>Total Anggaran per Perangkat Daerah</h5>
-                            <table id="tableANG" class="table table-borderless table-sm table-striped">
-                              <thead>
-                                  <tr>
-                                      <th>Column 1</th>
-                                      <th>Column 2</th>
-                                  </tr>
-                              </thead>
-                              <tbody class="table-group-divider">
-                                  <tr>
-                                      <td>Row 1 Data 1</td>
-                                      <td>Row 1 Data 2</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Row 2 Data 1</td>
-                                      <td>Row 2 Data 2</td>
-                                  </tr>
-                              </tbody>
-                           </table>
+                        <div class="col-sm-6 col-md-3 my-4">
+                          <div class="card card-danger">
+                            <div class="card-header" style="background-color: #084298 !important;">
+                              <label class="subheading">Perangkat Daerah dengan Anggaran Terendah</label>
+                            </div>
+                            <div class="card-body">
+                              <ol id="min_ang" class="list-group list-group-numbered list-group-flush">
+                              </ol>
+                            </div>
+                            <!-- /.card-body -->
                           </div>
-                          <div class="col-md-6">
-                            <h5>Total Realisasi per Perangkat Daerah</h5>
-                            <table id="tableREA" class="table table-borderless table-sm table-striped">
-                              <thead>
-                                  <tr>
-                                      <th>Column 1</th>
-                                      <th>Column 2</th>
-                                  </tr>
-                              </thead>
-                              <tbody class="table-group-divider">
-                                  <tr>
-                                      <td>Row 1 Data 1</td>
-                                      <td>Row 1 Data 2</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Row 2 Data 1</td>
-                                      <td>Row 2 Data 2</td>
-                                  </tr>
-                              </tbody>
-                           </table>
+                        </div>
+                        <div class="col-sm-6 col-md-3 my-4">
+                          <div class="card card-success">
+                            <div class="card-header">
+                              <label class="subheading">Perangkat Daerah dengan % Realisasi Tertinggi</label>
+                            </div>
+                            <div class="card-body">
+                              <ol id="max_re" class="list-group list-group-numbered list-group-flush">
+                              </ol>
+                            </div>
+                            <!-- /.card-body -->
                           </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 my-4">
+                          <div class="card card-danger">
+                            <div class="card-header" style="background-color: #0f5132 !important;">
+                              <label class="subheading">Perangkat Daerah dengan % Realisasi Terendah</label>
+                            </div>
+                            <div class="card-body">
+                              <ol id="min_re" class="list-group list-group-numbered list-group-flush">
+                              </ol>
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row d-none">
+                        <div class="col-md-6">
+                          <h5>Total Anggaran per Perangkat Daerah</h5>
+                          <table id="tableANG" class="table table-borderless table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Column 1</th>
+                                    <th>Column 2</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr>
+                                    <td>Row 1 Data 1</td>
+                                    <td>Row 1 Data 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Row 2 Data 1</td>
+                                    <td>Row 2 Data 2</td>
+                                </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-md-6">
+                          <h5>Total Realisasi per Perangkat Daerah</h5>
+                          <table id="tableREA" class="table table-borderless table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Column 1</th>
+                                    <th>Column 2</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr>
+                                    <td>Row 1 Data 1</td>
+                                    <td>Row 1 Data 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Row 2 Data 1</td>
+                                    <td>Row 2 Data 2</td>
+                                </tr>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
-                      <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
+                    <!-- /.card-body -->
                   </div>
+                  <!-- /.card -->
                 </div>
               </div>
             </div>
-        </main>
-    </div>
+          </div>
+      </main>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
-    <script src="./js/adminlte.js"></script>
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <script src="./js/adminlte.js"></script>
 
-    <script>
-        $(document).ready( function () {
+  <script>
+      $(document).ready( function () {
 
-          var chartdata = [
-                              {label: 'Realisasi Anggaran', nilai: 0},
-                              {label: 'Sisa Anggaran', nilai: 100},
-                            ]
-          
-          char = new Chart(
-            document.getElementById('charts').getContext('2d'),
-            {
-              type: 'doughnut',
-              data: {
-                labels: chartdata.map(row => row.label),
-                datasets: [
-                  {
-                    label: 'Total',
-                    data: chartdata.map(row => row.nilai),
-                    backgroundColor: [
-                      '#20c997',
-                      '#c92052',
-                    ],
-                    hoverOffset: 10
+        var chartdata = [
+                            {label: 'Realisasi Anggaran', nilai: 0},
+                            {label: 'Sisa Anggaran', nilai: 100},
+                          ]
+        
+        char = new Chart(
+          document.getElementById('charts').getContext('2d'),
+          {
+            type: 'doughnut',
+            data: {
+              labels: chartdata.map(row => row.label),
+              datasets: [
+                {
+                  label: 'Total',
+                  data: chartdata.map(row => row.nilai),
+                  backgroundColor: [
+                    '#20c997',
+                    '#c92052',
+                  ],
+                  hoverOffset: 10
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              layout: {
+                  padding: 10
+              },
+              plugins: {
+                  legend: {
+                      position: 'bottom',
+                      labels: {
+                          // This more specific font property overrides the global property
+                          font: {
+                              size: 14
+                          },
+                          textAlign: 'center',
+                          padding: 30
+                      }
                   }
-                ]
-              },
-              options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                layout: {
-                    padding: 10
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            // This more specific font property overrides the global property
-                            font: {
-                                size: 14
-                            },
-                            textAlign: 'center',
-                            padding: 30
-                        }
-                    }
-                }
-              },
-              plugins: [{
-                id: 'centerText',
-                afterDatasetsDraw(chart, args, pluginOptions) {
-                  const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
-                  ctx.save();
-
-                  // 1. Calculate the exact center coordinates of the chart area
-                  const centerX = left + width / 2;
-                  const centerY = top + height / 2;
-
-                  // 2. Configure font styles
-                  ctx.font = '900 1.6rem Roboto,sans-serif';
-                  ctx.fillStyle = '#333333';
-                  ctx.textAlign = 'center';
-                  ctx.textBaseline = 'middle';
-
-                  // 3. Define and draw the text string
-                  var r = chart.data.datasets[0].data[0];
-                  var s = chart.data.datasets[0].data[1];
-                  var text = ((r/(r+s)) * 100).toFixed(2) + '%' 
-                  ctx.fillText(text, centerX, centerY);
-                  
-                  ctx.restore();
-                }
-              }]
-            }
-          );
-
-          var tdetail = new DataTable('#tabledetail',{
-            searching: false,
-            ordering: true,
-            paging: true,
-            scrollX: true,
-            // dom: 'rtip',
-            layout: {
-              top2Start: {pageLength: true},
-              top2End: function(){
-                let conta = $('<div class="cstbl"></div').addClass('d-flex align-items-center justify-content-center')
-                return conta
-              },
-              topStart: {info: true},
-              topEnd: {paging: true},
+              }
             },
-            order: [[1, 'asc']],
-            ajax: {
-              url: '',
-              dataSrc: ''
+            plugins: [{
+              id: 'centerText',
+              afterDatasetsDraw(chart, args, pluginOptions) {
+                const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
+                ctx.save();
+
+                // 1. Calculate the exact center coordinates of the chart area
+                const centerX = left + width / 2;
+                const centerY = top + height / 2;
+
+                // 2. Configure font styles
+                ctx.font = '900 1.6rem Roboto,sans-serif';
+                ctx.fillStyle = '#333333';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // 3. Define and draw the text string
+                var r = chart.data.datasets[0].data[0];
+                var s = chart.data.datasets[0].data[1];
+                var text = ((r/(r+s)) * 100).toFixed(2) + '%' 
+                ctx.fillText(text, centerX, centerY);
+                
+                ctx.restore();
+              }
+            }]
+          }
+        );
+
+        var tdetail = new DataTable('#tabledetail',{
+          searching: false,
+          ordering: true,
+          paging: true,
+          scrollX: true,
+          // dom: 'rtip',
+          layout: {
+            top2Start: {pageLength: true},
+            top2End: function(){
+              let conta = $('<div class="cstbl"></div').addClass('d-flex align-items-center justify-content-center')
+              return conta
             },
-            columns: [
-              {
-                data: 'kode_urusan', 
-                title: '#',
-                width: '20px'
-              },
-              {
-                data: 'nama_skpd', 
-                title: 'Nama SKPD',
-                width: '150px'
-              },
-              {
-                data: 'nama_program', 
-                title: 'Nama Program',
-                width: '150px',
-                render: function(data, type, row){
-                    return row.kode_program + ' - ' + data
-                }
-              },
-              {
-                data: 'nama_kegiatan', 
-                title: 'Nama Kegiatan',
-                width: '200px',
-                render: function(data, type, row){
-                    return row.kode_kegiatan + ' - ' + data
-                }
-              },
-              {
-                data: 'nama_sub_kegiatan', 
-                title: 'Nama Sub Kegiatan',
-                width: '200px',
-                render: function(data, type, row){
-                    return row.kode_sub_kegiatan + ' - ' + data
-                }
-              },
-              {
-                data: 'nama_rekening', 
-                title: 'Nama Rekening',
-                width: '200px',
-              },
-              {
-                data: 'alokasi_anggaran',
-                title: 'Total Anggaran',
-                className: '',
-                width: '150px',
-                render: function(data, type){
-                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-                        // return parseFloat(data)
-                      }
-              },
-              {
-                data: 'realisasi_anggaran',
-                title: 'Total Realisasi',
-                width: '150px',
-                render: function(data, type){
-                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-                        // return parseFloat(data)
-                      }
-              },
-            ],
-            on: {
-                    draw: (e) => {
-                        let start = e.dt.page.info().start;
-            
-                        e.dt.column(0, {page: 'current'})
-                            .nodes()
-                            .each((cell, i) => {
-                                cell.textContent = start + i + 1;
-                            });
-                    }
-                }
-          })
-
-          var tang = new DataTable('#tableANG',{
-            searching: false,
-            order: [[2, 'desc']],
-            ajax: {
-              url: '',
-              dataSrc: ''
+            topStart: {info: true},
+            topEnd: {paging: true},
+          },
+          order: [[1, 'asc']],
+          ajax: {
+            url: '',
+            dataSrc: ''
+          },
+          columns: [
+            {
+              data: 'kode_urusan', 
+              title: '#',
+              width: '20px'
             },
-            columns: [
-              {
-                data: 'nama_skpd', 
-                title: '#',
-                width: '50px'
-              },
-              {
-                data: 'nama_skpd', 
-                title: 'Nama SKPD',
-                width: '200px'
-              },
-              {
-                data: 'anggaran',
-                title: 'Total Anggaran',
-                  width: '150px',
-                render: function(data, type){
-                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-                        // return parseFloat(data)
-                      }
-              },
-            ],
-            on: {
-                    draw: (e) => {
-                        let start = e.dt.page.info().start;
-            
-                        e.dt.column(0, {page: 'current'})
-                            .nodes()
-                            .each((cell, i) => {
-                                cell.textContent = start + i + 1;
-                            });
-                    }
-                }
-          })
-
-          var trea = new DataTable('#tableREA',{
-            searching: false,
-            order: [[3, 'desc']],
-            ajax: {
-              url: '',
-              dataSrc: ''
+            {
+              data: 'nama_skpd', 
+              title: 'Nama SKPD',
+              width: '150px'
             },
-            columns: [
-              {
-                data: 'nama_skpd', 
-                title: '#',
-                width: '50px'
-              },
-              {
-                data: 'nama_skpd', 
-                title: 'Nama SKPD',
-                width: '200px'
-              },
-              {
-                data: 'realisasi',
-                title: 'Total Realisasi',
-                  width: '150px',
-                render: function(data, type){
-                        return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-                        // return parseFloat(data)
-                      }
-              },
-              {
-                data: 'realisasi',
-                title: '% Realisasi',
-                  width: '80px',
-                render: function(data, type, row){
-                        return ((parseFloat(data) / parseFloat(row.anggaran)) * 100).toFixed(2) + '%'
-                      }
-              },
-            ],
-            on: {
-                    draw: (e) => {
-                        let start = e.dt.page.info().start;
-            
-                        e.dt.column(0, {page: 'current'})
-                            .nodes()
-                            .each((cell, i) => {
-                                cell.textContent = start + i + 1;
-                            });
+            {
+              data: 'nama_program', 
+              title: 'Nama Program',
+              width: '150px',
+              render: function(data, type, row){
+                  return row.kode_program + ' - ' + data
+              }
+            },
+            {
+              data: 'nama_kegiatan', 
+              title: 'Nama Kegiatan',
+              width: '200px',
+              render: function(data, type, row){
+                  return row.kode_kegiatan + ' - ' + data
+              }
+            },
+            {
+              data: 'nama_sub_kegiatan', 
+              title: 'Nama Sub Kegiatan',
+              width: '200px',
+              render: function(data, type, row){
+                  return row.kode_sub_kegiatan + ' - ' + data
+              }
+            },
+            {
+              data: 'nama_rekening', 
+              title: 'Nama Rekening',
+              width: '200px',
+            },
+            {
+              data: 'alokasi_anggaran',
+              title: 'Total Anggaran',
+              className: '',
+              width: '150px',
+              render: function(data, type){
+                      return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                      // return parseFloat(data)
                     }
-                }
-          })
-
-          //table here
-
-          var data_raw = []
-          var skpdi = []
-          var sum = 0
-          var real = 0
-          var contes = 0
+            },
+            {
+              data: 'realisasi_anggaran',
+              title: 'Total Realisasi',
+              width: '150px',
+              render: function(data, type){
+                      return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                      // return parseFloat(data)
+                    }
+            },
+          ],
+          on: {
+                  draw: (e) => {
+                      let start = e.dt.page.info().start;
           
-         $.getJSON("./raws.json", function(data) {
-            sum = 0
-            real = 0
-            data_raw = data
+                      e.dt.column(0, {page: 'current'})
+                          .nodes()
+                          .each((cell, i) => {
+                              cell.textContent = start + i + 1;
+                          });
+                  }
+              }
+        })
 
-            tdetail.clear().rows.add(data_raw).draw();
+        var tang = new DataTable('#tableANG',{
+          searching: false,
+          order: [[2, 'desc']],
+          ajax: {
+            url: '',
+            dataSrc: ''
+          },
+          columns: [
+            {
+              data: 'nama_skpd', 
+              title: '#',
+              width: '50px'
+            },
+            {
+              data: 'nama_skpd', 
+              title: 'Nama SKPD',
+              width: '200px'
+            },
+            {
+              data: 'anggaran',
+              title: 'Total Anggaran',
+                width: '150px',
+              render: function(data, type){
+                      return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                      // return parseFloat(data)
+                    }
+            },
+          ],
+          on: {
+                  draw: (e) => {
+                      let start = e.dt.page.info().start;
+          
+                      e.dt.column(0, {page: 'current'})
+                          .nodes()
+                          .each((cell, i) => {
+                              cell.textContent = start + i + 1;
+                          });
+                  }
+              }
+        })
+
+        var trea = new DataTable('#tableREA',{
+          searching: false,
+          order: [[3, 'desc']],
+          ajax: {
+            url: '',
+            dataSrc: ''
+          },
+          columns: [
+            {
+              data: 'nama_skpd', 
+              title: '#',
+              width: '50px'
+            },
+            {
+              data: 'nama_skpd', 
+              title: 'Nama SKPD',
+              width: '200px'
+            },
+            {
+              data: 'realisasi',
+              title: 'Total Realisasi',
+                width: '150px',
+              render: function(data, type){
+                      return 'Rp ' + data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                      // return parseFloat(data)
+                    }
+            },
+            {
+              data: 'realisasi',
+              title: '% Realisasi',
+                width: '80px',
+              render: function(data, type, row){
+                      return ((parseFloat(data) / parseFloat(row.anggaran)) * 100).toFixed(2) + '%'
+                    }
+            },
+          ],
+          on: {
+                  draw: (e) => {
+                      let start = e.dt.page.info().start;
+          
+                      e.dt.column(0, {page: 'current'})
+                          .nodes()
+                          .each((cell, i) => {
+                              cell.textContent = start + i + 1;
+                          });
+                  }
+              }
+        })
+
+        //table here
+
+        var data_raw = []
+        var skpdi = []
+        var sum = 0
+        var real = 0
+        var contes = 0
+        
+        $('.fullscreen-overlay').show()
+        $.getJSON("./raws.json", function(data) {
+          sum = 0
+          real = 0
+          data_raw = data
+
+          tdetail.clear().rows.add(data_raw).draw();
+
+          contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
+          if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
+          $('.cstbl span').text(' / ' + contes)
+
+          data.forEach(el => {
+            sum += parseFloat(el.alokasi_anggaran)
+            real += parseFloat(el.realisasi_anggaran)
+          })
+          $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+          $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+          let prosen = (real/sum) * 100
+          $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+            // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
+
+          char.data.datasets[0].data = [real, sum-real]
+          char.update()
+
+          var skpd = [...new Set(data.map(item => item.nama_skpd))].sort()
+
+          skpd.forEach(el => {
+            skpdi.push({
+              nama_skpd: el,
+              anggaran: 0,
+              realisasi: 0,
+              persen: 0,
+            })
+          })
+
+          data_raw.forEach(el => {
+            let sk = skpdi.findIndex(obj => obj.nama_skpd === el.nama_skpd);
+            skpdi[sk].anggaran += parseFloat(el.alokasi_anggaran)
+            skpdi[sk].realisasi += parseFloat(el.realisasi_anggaran)
+            skpdi[sk].persen = ((skpdi[sk].realisasi / skpdi[sk].anggaran) * 100).toFixed(2)
+          })
+          
+          let max_ang = $('#max_ang')
+          let min_ang = $('#min_ang')
+          let max_re = $('#max_re')
+          let min_re = $('#min_re')
+          let cn = 0
+
+          skpdi.sort((a, b) => b.anggaran - a.anggaran).forEach(el => {
+            if(cn < 5){
+              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+              let me = $('<div></div>').addClass('ms-2 me-auto')
+              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+              me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+              ol.append(me)
+              max_ang.append(ol)
+
+              cn++
+            }
+          })
+          cn = 0
+          skpdi.sort((a, b) => a.anggaran - b.anggaran).forEach(el => {
+            if(cn < 5){
+              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+              let me = $('<div></div>').addClass('ms-2 me-auto')
+              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+              me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+              ol.append(me)
+              min_ang.append(ol)
+
+              cn++
+            }
+          })
+          cn = 0
+
+          skpdi.sort((a, b) => b.persen - a.persen).forEach(el => {
+            if(cn < 5){
+              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+              let me = $('<div></div>').addClass('ms-2 me-auto')
+              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+              me.append(subh, el.persen + '%')
+              ol.append(me)
+              max_re.append(ol)
+
+              cn++
+            }
+          })
+          cn = 0
+          skpdi.sort((a, b) => a.persen - b.persen).forEach(el => {
+            if(cn < 5){
+              let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
+              let me = $('<div></div>').addClass('ms-2 me-auto')
+              let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
+
+              me.append(subh, el.persen + '%')
+              ol.append(me)
+              min_re.append(ol)
+
+              cn++
+            }
+          })
+
+          // tang.clear().rows.add(skpdi.sort((a, b) => b.anggaran - a.anggaran)).draw();
+          // trea.clear().rows.add(skpdi.sort((a, b) => b.realisasi - a.realisasi)).draw();
+
+          let select = $('<select class="form-select" style="width:100%;"><option value="">Pemerintah Kabupaten Blitar</option></select>')
+                          .appendTo($('#skpd_q')).select2()
+          let selectb = $('<select class="form-select" style="width:100%;"><option value="">Pilih Program</option></select>')
+                          .appendTo($('#prog_q')).select2()
+          let selectc = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
+                          .appendTo($('#keg_q')).select2()
+
+          select.on('change', function(){
+            // $('#prog_q').empty()
+            selectb.empty()
+            let val = $(this).val()
+
+            if(val != '') {
+              let prg = $.grep(data, function(k, i){
+                              return k.nama_skpd == val
+                            })
+              var kegiatan = [...new Set(prg.map(item => item.nama_program))].sort()
+              // let select = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
+                            // .appendTo($('#prog_q')).select2()
+              selectb.append('<option value="">Pilih Program</option>')
+              $.each(kegiatan, function(k,i){
+                  var opts = new Option(i,i, false, false)
+                  selectb.append(opts) 
+                })
+
+              selectb.on('change', function(k, i){
+                selectc.empty()
+                let val = $(this).val()
+                  selectc.append('<option value="">Pilih Kegiatan</option>')
+                if(val != ''){
+                  let kgt = $.grep(data, function(k, i){
+                              return k.nama_skpd == select.val() && k.nama_program == val
+                            })
+                  var kegiatan = [...new Set(kgt.map(item => item.nama_kegiatan))].sort()
+                  $.each(kegiatan, function(k,i){
+                      var opts = new Option(i,i, false, false)
+                      selectc.append(opts) 
+                    })
+                }
+
+                  selectc.trigger('change')
+              })
+            }
+            selectb.trigger('change')
+
+          })
+          $.each(skpd, function(k,i){
+            select.append('<option value="'+i+'">'+i+'</option>') 
+          })
+        })
+        .fail(function(error) {
+            alert('Gagal mengambil data!')
+        })
+        .always(function(){
+          $('.fullscreen-overlay').hide()
+        });
+
+        tdetail.columns.adjust().draw();
+
+        $('#cari').on('click', function(){
+          let s = $('#skpd_q select').val()
+          let k = $('#prog_q select').val()
+          let k2 = $('#keg_q select').val()
+          sum = 0
+          real = 0
+
+          if(s == ''){
+            let new_data = []
+            data_raw.forEach(el => {
+              if(el.nama_skpd == s || s == ''){
+                new_data.push(el)
+                sum += parseFloat(el.alokasi_anggaran)
+                real += parseFloat(el.realisasi_anggaran)
+              }
+            })
+
+            tdetail.clear().rows.add(new_data).draw();
 
             contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
             if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
             $('.cstbl span').text(' / ' + contes)
 
-            data.forEach(el => {
-              sum += parseFloat(el.alokasi_anggaran)
-              real += parseFloat(el.realisasi_anggaran)
-            })
-            $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-            $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-            let prosen = (real/sum) * 100
-            $('#realisasi_tx').text(prosen.toFixed(2) + '%')
-              // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
-
-            char.data.datasets[0].data = [real, sum-real]
-            char.update()
-
-            var skpd = [...new Set(data.map(item => item.nama_skpd))].sort()
-
-            skpd.forEach(el => {
-              skpdi.push({
-                nama_skpd: el,
-                anggaran: 0,
-                realisasi: 0,
-                persen: 0,
-              })
-            })
-
-            data_raw.forEach(el => {
-              let sk = skpdi.findIndex(obj => obj.nama_skpd === el.nama_skpd);
-              skpdi[sk].anggaran += parseFloat(el.alokasi_anggaran)
-              skpdi[sk].realisasi += parseFloat(el.realisasi_anggaran)
-              skpdi[sk].persen = ((skpdi[sk].realisasi / skpdi[sk].anggaran) * 100).toFixed(2)
-            })
-            
-            let max_ang = $('#max_ang')
-            let min_ang = $('#min_ang')
-            let max_re = $('#max_re')
-            let min_re = $('#min_re')
-            let cn = 0
-
-            skpdi.sort((a, b) => b.anggaran - a.anggaran).forEach(el => {
-              if(cn < 5){
-                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-                let me = $('<div></div>').addClass('ms-2 me-auto')
-                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-                me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-                ol.append(me)
-                max_ang.append(ol)
-
-                cn++
-              }
-            })
-            cn = 0
-            skpdi.sort((a, b) => a.anggaran - b.anggaran).forEach(el => {
-              if(cn < 5){
-                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-                let me = $('<div></div>').addClass('ms-2 me-auto')
-                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-                me.append(subh, 'Rp ' + el.anggaran.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-                ol.append(me)
-                min_ang.append(ol)
-
-                cn++
-              }
-            })
-            cn = 0
-
-            skpdi.sort((a, b) => b.persen - a.persen).forEach(el => {
-              if(cn < 5){
-                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-                let me = $('<div></div>').addClass('ms-2 me-auto')
-                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-                me.append(subh, el.persen + '%')
-                ol.append(me)
-                max_re.append(ol)
-
-                cn++
-              }
-            })
-            cn = 0
-            skpdi.sort((a, b) => a.persen - b.persen).forEach(el => {
-              if(cn < 5){
-                let ol = $('<ol></ol>').addClass('list-group-item d-flex justify-content-between align-items-start')
-                let me = $('<div></div>').addClass('ms-2 me-auto')
-                let subh = $('<div></div>').addClass('subheading').append(el.nama_skpd)
-
-                me.append(subh, el.persen + '%')
-                ol.append(me)
-                min_re.append(ol)
-
-                cn++
-              }
-            })
-
-            // tang.clear().rows.add(skpdi.sort((a, b) => b.anggaran - a.anggaran)).draw();
-            // trea.clear().rows.add(skpdi.sort((a, b) => b.realisasi - a.realisasi)).draw();
-
-            let select = $('<select class="form-select" style="width:100%;"><option value="">Pemerintah Kabupaten Blitar</option></select>')
-                            .appendTo($('#skpd_q')).select2()
-            let selectb = $('<select class="form-select" style="width:100%;"><option value="">Pilih Program</option></select>')
-                            .appendTo($('#prog_q')).select2()
-            let selectc = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
-                            .appendTo($('#keg_q')).select2()
-
-            select.on('change', function(){
-              // $('#prog_q').empty()
-              selectb.empty()
-              let val = $(this).val()
-
-              if(val != '') {
-                let prg = $.grep(data, function(k, i){
-                                return k.nama_skpd == val
-                              })
-                var kegiatan = [...new Set(prg.map(item => item.nama_program))].sort()
-                // let select = $('<select class="form-select" style="width:100%;"><option value="">Pilih Kegiatan</option></select>')
-                              // .appendTo($('#prog_q')).select2()
-                selectb.append('<option value="">Pilih Program</option>')
-                $.each(kegiatan, function(k,i){
-                    var opts = new Option(i,i, false, false)
-                    selectb.append(opts) 
-                  })
-
-                selectb.on('change', function(k, i){
-                  selectc.empty()
-                  let val = $(this).val()
-                    selectc.append('<option value="">Pilih Kegiatan</option>')
-                  if(val != ''){
-                    let kgt = $.grep(data, function(k, i){
-                                return k.nama_skpd == select.val() && k.nama_program == val
-                              })
-                    var kegiatan = [...new Set(kgt.map(item => item.nama_kegiatan))].sort()
-                    $.each(kegiatan, function(k,i){
-                        var opts = new Option(i,i, false, false)
-                        selectc.append(opts) 
-                      })
-                  }
-
-                    selectc.trigger('change')
-                })
-              }
-              selectb.trigger('change')
-
-            })
-            $.each(skpd, function(k,i){
-              select.append('<option value="'+i+'">'+i+'</option>') 
-            })
-          })
-          .fail(function(error) {
-              alert('Gagal mengambil data!')
-          });
-
-          tdetail.columns.adjust().draw();
-
-          $('#cari').on('click', function(){
-            let s = $('#skpd_q select').val()
-            let k = $('#prog_q select').val()
-            let k2 = $('#keg_q select').val()
-            sum = 0
-            real = 0
-
-            if(s == ''){
-              let new_data = []
-              data_raw.forEach(el => {
-                if(el.nama_skpd == s || s == ''){
-                  new_data.push(el)
-                  sum += parseFloat(el.alokasi_anggaran)
-                  real += parseFloat(el.realisasi_anggaran)
-                }
-              })
-
-              tdetail.clear().rows.add(new_data).draw();
-
-              contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
-              if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
-              $('.cstbl span').text(' / ' + contes)
-
-              //tdetail.column(4).search(s).draw()
-            }else{
-              let new_data = []
-              data_raw.forEach(el => {
-                if(el.nama_skpd == s && (el.nama_program == k || k == '') && (el.nama_kegiatan == k2 || k2 == '')){
-                  new_data.push(el)
-                  sum += parseFloat(el.alokasi_anggaran)
-                  real += parseFloat(el.realisasi_anggaran)
-                }
-              })
-
-              tdetail.clear().rows.add(new_data).draw();
-
-              contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
-              if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
-              $('.cstbl span').text(' / ' + contes)
-
-              //tdetail.column(4).search(s).column(5).search(k).draw()
-            }
-
-            $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-            $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-            let prosen = (real/sum) * 100
-            $('#realisasi_tx').text(prosen.toFixed(2) + '%')
-              // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
-
-            char.data.datasets[0].data = [real, sum-real]
-            char.update()
-
-          })
-
-          $('#reset').on('click', function () {
-            $('#skpd_q select').val('').trigger("change");
-            $('#prog_q select').empty().append('<option value="">Pilih Program</option>').trigger("change");
-            $('#keg_q select').empty().append('<option value="">Pilih Kegiatan</option>').trigger("change");
-            let sum = 0
-            let real = 0
+            //tdetail.column(4).search(s).draw()
+          }else{
             let new_data = []
-
             data_raw.forEach(el => {
+              if(el.nama_skpd == s && (el.nama_program == k || k == '') && (el.nama_kegiatan == k2 || k2 == '')){
                 new_data.push(el)
                 sum += parseFloat(el.alokasi_anggaran)
                 real += parseFloat(el.realisasi_anggaran)
-              })
+              }
+            })
 
-              tdetail.clear().rows.add(new_data).draw();
-              
-              contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
-              if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
-              $('.cstbl span').text(' / ' + contes)
+            tdetail.clear().rows.add(new_data).draw();
 
-              // tdetail.column(4).search('').column(5).search('').draw()
-
-            $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-            $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
-            let prosen = (real/sum) * 100
-            $('#realisasi_tx').text(prosen.toFixed(2) + '%')
-              // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
-
-            char.data.datasets[0].data = [real, sum-real]
-            char.update()
-
-          })
-
-          let inpi = $('<input style="width: 50px" />').addClass('form-input mx-2')
-          let butt = $('<button></button>').on('click', function(){
-            let v = parseInt(inpi.val(), 10)
-            if(!isNaN(v) && v > 0) {
-              tdetail.page(v-1).draw(false)
-            }
-            inpi.val('')
-          }).text('Go to page').addClass('btn btn-primary btn-sm')
-          
-          $('.cstbl').append('<label>Page </label>').append(inpi).append($('<span class=""></span>')).append(butt.addClass('mx-2'))
-
-
-          tdetail.on('length.dt', function (e, settings, len) {
-            contes = tdetail.page.info().recordsTotal / len
-            if(contes % len != 0) contes = Math.ceil(contes)
+            contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
+            if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
             $('.cstbl span').text(' / ' + contes)
-          });
+
+            //tdetail.column(4).search(s).column(5).search(k).draw()
+          }
+
+          $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+          $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+          let prosen = (real/sum) * 100
+          $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+            // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
+
+          char.data.datasets[0].data = [real, sum-real]
+          char.update()
+
+        })
+
+        $('#reset').on('click', function () {
+          $('#skpd_q select').val('').trigger("change");
+          $('#prog_q select').empty().append('<option value="">Pilih Program</option>').trigger("change");
+          $('#keg_q select').empty().append('<option value="">Pilih Kegiatan</option>').trigger("change");
+          let sum = 0
+          let real = 0
+          let new_data = []
+
+          data_raw.forEach(el => {
+              new_data.push(el)
+              sum += parseFloat(el.alokasi_anggaran)
+              real += parseFloat(el.realisasi_anggaran)
+            })
+
+            tdetail.clear().rows.add(new_data).draw();
+            
+            contes = tdetail.page.info().recordsTotal / tdetail.page.info().length
+            if(contes % tdetail.page.info().length != 0) contes = Math.ceil(contes)
+            $('.cstbl span').text(' / ' + contes)
+
+            // tdetail.column(4).search('').column(5).search('').draw()
+
+          $('#anggaran').text('Rp ' + sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+          $('#realisasi').text('Rp ' + real.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+          let prosen = (real/sum) * 100
+          $('#realisasi_tx').text(prosen.toFixed(2) + '%')
+            // $('#realisasi_pr').css('width',prosen.toFixed(2) + '%')
+
+          char.data.datasets[0].data = [real, sum-real]
+          char.update()
+
+        })
+
+        let inpi = $('<input style="width: 50px" />').addClass('form-input mx-2')
+        let butt = $('<button></button>').on('click', function(){
+          let v = parseInt(inpi.val(), 10)
+          if(!isNaN(v) && v > 0) {
+            tdetail.page(v-1).draw(false)
+          }
+          inpi.val('')
+        }).text('Go to page').addClass('btn btn-primary btn-sm')
+        
+        $('.cstbl').append('<label>Page </label>').append(inpi).append($('<span class=""></span>')).append(butt.addClass('mx-2'))
 
 
-        } );
-    </script>
+        tdetail.on('length.dt', function (e, settings, len) {
+          contes = tdetail.page.info().recordsTotal / len
+          if(contes % len != 0) contes = Math.ceil(contes)
+          $('.cstbl span').text(' / ' + contes)
+        });
+
+
+      } );
+  </script>
 </body>
 </html>
