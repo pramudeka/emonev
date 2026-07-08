@@ -334,7 +334,7 @@
                         </div>
                       </div>
                     </div>
-
+<!-- 
                     <div class="col-md-6 col-xl-4 d-none">
                       <div class="info-box text-bg-primary" style="background-color: var( --bs-indigo) !important;">
                         <div class="info-box-content">
@@ -342,7 +342,7 @@
                           <h3 id="realisasi_tx" style="font: 500 20px/32px Roboto,Helvetica Neue,sans-serif !important;"></h3>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-6 col-xl-6">
                       <div class="card boxy card-secondary">
@@ -419,110 +419,6 @@
                   </div>
                 </div>
 
-                <div class="col-xl-12 col-md-12 my-4 d-none">
-                  <div class="card">
-                    <div class="card-body m-0">
-                      <div class="row" style="font-size: .8rem !important;">
-
-                        <div class="col-sm-6 col-md-3 my-4">
-                          <div class="card card-primary">
-                            <div class="card-header">
-                              <label class="subheading">Perangkat Daerah dengan Anggaran Tertinggi</label>
-                            </div>
-                            <div class="card-body">
-                              <ol id="max_ang" class="list-group list-group-numbered list-group-flush">
-                              </ol>
-                            </div>
-                            <!-- /.card-body -->
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 my-4">
-                          <div class="card card-danger">
-                            <div class="card-header" style="background-color: #084298 !important;">
-                              <label class="subheading">Perangkat Daerah dengan Anggaran Terendah</label>
-                            </div>
-                            <div class="card-body">
-                              <ol id="min_ang" class="list-group list-group-numbered list-group-flush">
-                              </ol>
-                            </div>
-                            <!-- /.card-body -->
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 my-4">
-                          <div class="card card-success">
-                            <div class="card-header">
-                              <label class="subheading">Perangkat Daerah dengan % Realisasi Tertinggi</label>
-                            </div>
-                            <div class="card-body">
-                              <ol id="max_re" class="list-group list-group-numbered list-group-flush">
-                              </ol>
-                            </div>
-                            <!-- /.card-body -->
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 my-4">
-                          <div class="card card-danger">
-                            <div class="card-header" style="background-color: #0f5132 !important;">
-                              <label class="subheading">Perangkat Daerah dengan % Realisasi Terendah</label>
-                            </div>
-                            <div class="card-body">
-                              <ol id="min_re" class="list-group list-group-numbered list-group-flush">
-                              </ol>
-                            </div>
-                            <!-- /.card-body -->
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="row d-none">
-                        <div class="col-md-6">
-                          <h5>Total Anggaran per Perangkat Daerah</h5>
-                          <table id="tableANG" class="table table-borderless table-sm table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr>
-                                    <td>Row 1 Data 1</td>
-                                    <td>Row 1 Data 2</td>
-                                </tr>
-                                <tr>
-                                    <td>Row 2 Data 1</td>
-                                    <td>Row 2 Data 2</td>
-                                </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div class="col-md-6">
-                          <h5>Total Realisasi per Perangkat Daerah</h5>
-                          <table id="tableREA" class="table table-borderless table-sm table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr>
-                                    <td>Row 1 Data 1</td>
-                                    <td>Row 1 Data 2</td>
-                                </tr>
-                                <tr>
-                                    <td>Row 2 Data 1</td>
-                                    <td>Row 2 Data 2</td>
-                                </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.card-body -->
-                  </div>
-                  <!-- /.card -->
-                </div>
               </div>
             </div>
           </div>
@@ -964,7 +860,7 @@
             alert('Gagal mengambil data!')
         })
         .always(function(){
-          $('.fullscreen-overlay').fadeOut('slow)
+          $('.fullscreen-overlay').fadeOut('slow')
         });
 
         tdetail.columns.adjust().draw();
